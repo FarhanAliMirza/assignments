@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "test-requestCounter": "./node_modules/jest/bin/jest.js ./tests/01-requestcount.spec.js",
+    "test-requestLimiter": "./node_modules/jest/bin/jest.js ./tests/02-ratelimitter.spec.js"
+
   },
   "keywords": [],
   "author": "",
