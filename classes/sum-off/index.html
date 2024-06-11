@@ -1,0 +1,27 @@
+<html>
+    <script>
+        function sum() {
+            const n1 = document.getElementById("n1").value;
+            const n2 = document.getElementById("n2").value;
+            const result = document.getElementById("result");
+            fetch("https://sum-server.100xdevs.com/sum?a=" + n1 + "&b=" + n2)
+            .then(function(response) {
+                return response.text()
+                .then(function(text) {
+                    result.innerText = text;
+                });
+            })
+            // const sum = parseInt(n1) + parseInt(n2);
+            // document.getElementById("result").innerText = "The sum is " + sum;
+        }
+    </script>
+    <body>
+        <input type="number" id="n1" placeholder="First Number" />
+        <br></br>
+        <input type="number" id="n2" placeholder="Second Number" />
+        <br></br>
+        <button onclick="sum()">Sum</button>
+        <br></br>
+        <p id="result"></p>
+    </body>
+</html>
