@@ -1,12 +1,11 @@
 const express = require("express");
 const zod = require("zod");
-const { User } = require("../db");
+const { User, Account } = require("../db");
 const JWT_SECRET = require("../config");
 const jwt = require("jsonwebtoken");
 const { authMiddleware } = require("../middleware");
-//eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MjQ3NTAxODF9.6MVrpw7QYVGMrwN_FpoZYc0bUTjFXdgxsx0TXzyq0r0
-//eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmNkOWQ1OTQxNTRkMGZiZGEyNzVkY2QiLCJpYXQiOjE3MjQ3NTExOTN9.kA1TSE4htC3mSX-EV8TvfAUw7_PtjBmwvOU_o6XVdAE
-//eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MjQ3NTEyNTB9.QDrQnSH6T5dVAmGIFIlpkS12q_nYIVgHsfy6STwPRIc
+//eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmQwMmQ3YjRkNGJmNWJjNGVmMDg2ZTciLCJpYXQiOjE3MjQ5MTkxNjN9.5NErE6ezz7KJqU261Rh0z1gS7jSZ7UWBJwm8BMinrvg
+//eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmQwMmY4YTg4OGQwM2Y0ZDNlMGJkZmQiLCJpYXQiOjE3MjQ5MTk2OTF9.uhnsmXAbxTuznqqiuNV4b55I96Duvy3N7F4MGLqdGdQ
 const router = express.Router();
 
 //all schemas
@@ -42,7 +41,9 @@ router.post("/signup", async (req, res) => {
   }
 
   const dbUser = await User.create(body);
-  const token = jwt.sign({ userId: dbUser._id }, JWT_SECRET);
+  const userId = dbUser._id;
+  await Account.create({ userId: userId, balance: 1 + Math.random() * 1000 });
+  const token = jwt.sign({ userId: userId }, JWT_SECRET);
   res.json({ message: "User created successfully", token: token });
 });
 
@@ -90,11 +91,13 @@ router.get("/bulk", authMiddleware, async (req, res) => {
       {
         firstName: {
           $regex: filter,
+          $options: "i",
         },
       },
       {
         lastName: {
           $regex: filter,
+          $options: "i",
         },
       },
     ],
