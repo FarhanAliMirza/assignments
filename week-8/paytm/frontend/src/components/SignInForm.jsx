@@ -6,15 +6,11 @@ import {
   Button,
   Stack,
   Divider,
-  Center,
   Card,
   CardHeader,
   CardBody,
   CardFooter,
-  FormControl,
   FormLabel,
-  FormErrorMessage,
-  FormHelperText,
   Input,
 } from "@chakra-ui/react";
 
@@ -39,9 +35,12 @@ const SignInForm = () => {
         </CardBody>
         <Divider />
         <CardFooter textAlign={"center"}>
-            <Text as={"i"}>
-              Don't have an account ?  <Link href="/signup" textColor={"blue"}>Sign up</Link>
-            </Text>
+          <Text as={"i"}>
+            Don't have an account ?{" "}
+            <Link href="/signup" textColor={"blue"}>
+              Sign up
+            </Link>
+          </Text>
         </CardFooter>
       </Card>
     </div>

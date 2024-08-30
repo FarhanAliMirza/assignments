@@ -10,7 +10,7 @@ const Hero = () => {
     <Stack spacing={4} p={"5"}>
         <Heading>Hi, Farhan</Heading>
         <Text>Balance: 
-            $1000.55
+        ₹99999999909.55
         </Text>
     </Stack>
   )
