@@ -14,6 +14,7 @@ import {
   Input,
 } from "@chakra-ui/react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const SignUpForm = () => {
   const [userDetails, setUserDetails] = useState({
@@ -23,21 +24,29 @@ const SignUpForm = () => {
     password: "",
   });
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
   const SignUpHandler = async () => {
     setIsLoading(true);
-    const response = await axios.post(
-      "http://localhost:3000/api/v1/user/signup",
-      userDetails
-    );
-    localStorage.setItem("token", response.data.token);
-    setUserDetails({
-      username: "",
-      firstName: "",
-      lastName: "",
-      password: "",
-    });
-    setIsLoading(false);
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/api/v1/user/signup",
+        userDetails
+      );
+      localStorage.setItem("token", response.data.token);
+      setUserDetails({
+        username: "",
+        firstName: "",
+        lastName: "",
+        password: "",
+      });
+      setIsLoading(false);
+      navigate("/");
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (

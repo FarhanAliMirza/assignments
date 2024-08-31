@@ -1,4 +1,4 @@
-import {useState, useEffect} from "react";
+import { useState, useEffect } from "react";
 import {
   Text,
   Button,
@@ -15,35 +15,52 @@ import {
 } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const UserTable = () => {
+
   const [users, setUsers] = useState([
-    {
-      userId: "2345678",
-      userName: "John Doe",
-    },
-    {
-      userId: "2345679",
-      userName: "Jane Doe",
-    },
-    {
-      userId: "2345680",
-      userName: "John Smith",
-    },
-    {
-      userId: "2345681",
-      userName: "Jane Smith",
-    },
+    // {
+    //   userId: "2345678",
+    //   userName: "John Doe",
+    // },
+    // {
+    //   userId: "2345679",
+    //   userName: "Jane Doe",
+    // },
+    // {
+    //   userId: "2345680",
+    //   userName: "John Smith",
+    // },
+    // {
+    //   userId: "2345681",
+    //   userName: "Jane Smith",
+    // },
   ]);
 
-  // useEffect(async () => {
-  //   const response = await axios.get("http://localhost:3000/api/v1/user/bulk", {
-  //     headers: {
-  //       Authorization: `Bearer ${localStorage.getItem("token")}`,
-  //     },
-  //   });
-  //   setUsers(response.data);
-  // }, []);
+  const getUsers = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost:3000/api/v1/user/bulk",
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+      setUsers(response.data.user);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    getUsers();
+  }, []);
+
+  const sendMoney = (userId) => {
+
+  };
 
   return (
     <>
@@ -65,7 +82,7 @@ const UserTable = () => {
           <Tbody>
             {users.map((user) => (
               <Tr key={user.userId}>
-                <Td>{user.userName}</Td>
+                <Td>{user.firstName} {user.lastName}</Td>
                 <Td isNumeric>
                   <Button colorScheme={"blue"}>Send</Button>
                 </Td>
