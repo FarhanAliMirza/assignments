@@ -1,23 +1,47 @@
-import React from "react";
+import {useState} from "react";
 import {
   Text,
   Heading,
-  Link,
+  Circle,
+  Box,
   Button,
   ButtonGroup,
   Stack,
-  Divider,
   Card,
   CardHeader,
   CardBody,
-  CardFooter,
   FormLabel,
   Input,
   InputGroup,
   InputLeftElement,
 } from "@chakra-ui/react";
+import { useSearchParams } from "react-router-dom";
+import axios from "axios";
 
 const SendMoney = () => {
+  const [amount, setAmount] = useState(0);
+  const [searchParams] = useSearchParams();
+  const userId = searchParams.get("userId");
+  const name = searchParams.get("name");
+  const sendMoney = async () => {
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/api/v1/account/transfer",
+        {
+          to: userId,
+          amount: amount,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+      console.log(response.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
   return (
     <div>
       <Card w={"sm"}>
@@ -26,9 +50,16 @@ const SendMoney = () => {
         </CardHeader>
         <CardBody>
           <Stack gap={0}>
-            <Text fontSize="lg" as={"kbd"} mb={"3"} textAlign={"center"}>
-              Hakirat
-            </Text>
+            <Stack direction={"row"} gap={"3"} mb={"3"}>
+              <Circle size={"40px"} bg={"green"} color={"white"}>
+                <Box as="span" fontWeight="bold" fontSize="lg">
+                  {name[0]}
+                </Box>
+              </Circle>
+              <Text fontSize="lg" as={"kbd"} mt={"1.5"} textAlign={"center"}>
+                {name}
+              </Text>
+            </Stack>
             <FormLabel>Amount</FormLabel>
             <InputGroup>
               <InputLeftElement
@@ -38,10 +69,10 @@ const SendMoney = () => {
               >
                 ₹
               </InputLeftElement>
-              <Input placeholder="1,000" type="number" mb={3} />
+              <Input placeholder="1,000" type="number" mb={3} onChange={(e)=>{setAmount(e.target.value)}}/>
             </InputGroup>
             <ButtonGroup className="flex justify-end">
-              <Button colorScheme="blue" mt={3}>
+              <Button colorScheme="blue" mt={3} onClick={sendMoney}>
                 Send
               </Button>
               <Button colorScheme="gray" mt={3}>

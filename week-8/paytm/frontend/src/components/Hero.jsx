@@ -1,16 +1,17 @@
-import {useEffect, useState} from 'react'
-import {
-    Heading,
-    Stack,
-    Text
-} from '@chakra-ui/react'
-import axios from 'axios';
+import { useEffect, useState } from "react";
+import { Heading, Stack, Text } from "@chakra-ui/react";
+import axios from "axios";
 
 const Hero = () => {
-  const [user, setUser] = useState({})
+  const [user, setUser] = useState({});
   const [balance, setBalance] = useState(0);
 
   const getUser = async () => {
+    const userResponse = await axios.get(
+      "http://localhost:3000/api/v1/user/details",
+      { headers: { Authorization: `Bearer ${localStorage.getItem("token")}` } }
+    );
+    setUser(userResponse.data.user);
     const response = await axios.get(
       "http://localhost:3000/api/v1/account/balance",
       {
@@ -20,7 +21,7 @@ const Hero = () => {
       }
     );
     setBalance(response.data.balance);
-  }
+  };
 
   useEffect(() => {
     getUser();
@@ -28,12 +29,10 @@ const Hero = () => {
 
   return (
     <Stack spacing={4} p={"5"}>
-        <Heading>Hi, Farhan</Heading>
-        <Text>Balance: 
-        ₹{balance}
-        </Text>
+      <Heading>Hi, {user.firstName} {user.lastName}</Heading>
+      <Text>Balance: ₹{balance}</Text>
     </Stack>
-  )
-}
+  );
+};
 
-export default Hero
+export default Hero;
