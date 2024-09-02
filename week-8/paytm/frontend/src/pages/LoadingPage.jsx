@@ -1,11 +1,8 @@
 import { useEffect } from "react";
-import Navbar from "../components/Navbar";
-import Hero from "../components/Hero";
-import UserTable from "../components/UserTable";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const Home = () => {
+const LoadingPage = () => {
   const navigate = useNavigate();
   const checkAuth = async () => {
     try {
@@ -17,6 +14,9 @@ const Home = () => {
           },
         }
       );
+      if (response.status === 200) {
+        navigate("/home");
+      }
     } catch (e) {
       navigate("/signin");
     }
@@ -24,13 +24,7 @@ const Home = () => {
   useEffect(() => {
     checkAuth();
   }, []);
-  return (
-    <div>
-      <Navbar />
-      <Hero />
-      <UserTable />
-    </div>
-  );
+  return <div>Loading ....</div>;
 };
 
-export default Home;
+export default LoadingPage;

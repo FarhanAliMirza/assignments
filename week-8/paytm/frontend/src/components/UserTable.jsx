@@ -76,7 +76,12 @@ const UserTable = () => {
                   {user.firstName} {user.lastName}
                 </Td>
                 <Td isNumeric>
-                  <Button colorScheme={"blue"} onClick={()=>{sendMoney(user)}}>
+                  <Button
+                    colorScheme={"blue"}
+                    onClick={() => {
+                      sendMoney(user);
+                    }}
+                  >
                     Send
                   </Button>
                 </Td>
