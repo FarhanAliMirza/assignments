@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LoadingPage from "./pages/LoadingPage";
 import Home from "./pages/home";
+import LandingPage from "./pages/LandingPage";
 import SignUp from "./pages/signup";
 import SignIn from "./pages/signin";
 import Send from "./pages/Send";
@@ -11,6 +12,7 @@ function App() {
       <Routes>
         <Route index element={<LoadingPage />} />
         <Route path="home" element={<Home />} />
+        <Route path="landing" element={<LandingPage />} />
         <Route path="signup" element={<SignUp />} />
         <Route path="signin" element={<SignIn />} />
         <Route path="send" element={<Send />} />
