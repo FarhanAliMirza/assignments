@@ -1,2 +1,2 @@
 
-export const DB_URL = "postgresql://postgres:QS4fTZTaKrvv96kd@agreeably-surpassing-caracara.data-1.use1.tembo.io:5432/postgres";
+export const DB_URL = "postgresql://test_owner:DB0yxlNi9qJj@ep-shy-math-a5qq11w6.us-east-2.aws.neon.tech/test?sslmode=require";
