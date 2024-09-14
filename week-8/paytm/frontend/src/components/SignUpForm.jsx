@@ -33,7 +33,7 @@ const SignUpForm = () => {
     setIsLoading(true);
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/v1/user/signup",
+        "http://13.127.184.71:3000/api/v1/user/signup",
         userDetails
       );
       localStorage.setItem("token", response.data.token);

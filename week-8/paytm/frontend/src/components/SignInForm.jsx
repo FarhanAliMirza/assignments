@@ -31,7 +31,7 @@ const SignInForm = () => {
     console.log(userDetails);
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/v1/user/signin",
+        "http://13.127.184.71:3000/api/v1/user/signin",
         userDetails
       );
       localStorage.setItem("token", response.data.token);

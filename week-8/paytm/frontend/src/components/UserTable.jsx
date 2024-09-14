@@ -25,7 +25,7 @@ const UserTable = () => {
   const getUsers = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:3000/api/v1/user/bulk?filter=" + filter,
+        "http://13.127.184.71:3000/api/v1/user/bulk?filter=" + filter,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,

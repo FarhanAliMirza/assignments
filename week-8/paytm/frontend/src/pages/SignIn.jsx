@@ -8,7 +8,7 @@ const Signin = () => {
   const checkAuth = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:3000/api/v1/user/details",
+        "http://13.127.184.71:3000/api/v1/user/details",
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,

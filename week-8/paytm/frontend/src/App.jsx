@@ -1,9 +1,9 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LoadingPage from "./pages/LoadingPage";
-import Home from "./pages/home";
+import Home from "./pages/Home";
 import LandingPage from "./pages/LandingPage";
-import SignUp from "./pages/signup";
-import SignIn from "./pages/signin";
+import SignUp from "./pages/SignUp";
+import SignIn from "./pages/SignIn";
 import Send from "./pages/Send";
 
 function App() {

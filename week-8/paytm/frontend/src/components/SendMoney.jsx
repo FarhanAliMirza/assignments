@@ -26,7 +26,7 @@ const SendMoney = () => {
   const sendMoney = async () => {
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/v1/account/transfer",
+        "http://13.127.184.71:3000/api/v1/account/transfer",
         {
           to: userId,
           amount: amount,
